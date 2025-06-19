@@ -30,5 +30,5 @@ kubectl apply --filename $kubevirt_url/kubevirt-operator.yaml
 header_text "Setting up KubeVirt CRDs"
 kubectl apply --filename $kubevirt_url/kubevirt-cr.yaml
 
-header_text "Waiting for Knative Eventing to become ready"
+header_text "Waiting for KubeVirt to become ready"
 kubectl wait deployment --all --timeout=-1s --for=condition=Available -n kubevirt
