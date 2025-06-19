@@ -1,0 +1,14 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: go
+runtime: go
+registry: quay.io/lberk/virt-example
+namespace: default
+created: 2025-06-23T16:20:59.946080485-04:00
+invoke: cloudevent
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: quay.io/lberk/virt-example/go@sha256:58435959bbaae56929532eec5482604ef5493b5983270775f3f0c05f4745ea5d
