@@ -1,0 +1,26 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: EventTransform
+metadata:
+  name: kubevirt-example
+spec:
+  jsonata:
+    expression: |
+      {
+        "specversion": specversion,
+        "type": "org.acme.kubevirt",
+        "source": source,
+        "subject": subject,
+        "id": id,
+        "time": time,
+        "kind": kind,
+        "name": name,
+        "namespace": namespace,
+        "state": data.status.printableStatus,
+        "runStrategy": data.status.runStrategy
+      }
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: inmem-broker
+

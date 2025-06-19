@@ -1,0 +1,34 @@
+# Trigger to filter events to EventTransform
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger-event-transform
+spec:
+  broker: inmem-broker
+  filters:
+    - prefix:
+        type: dev.knative.apiserver.resource.
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: EventTransform
+      name: kubevirt-example
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kubevirt-stop-notify
+spec:
+  broker: inmem-broker
+  filters:
+    - all:
+      - exact:
+          runstrategy: Halted
+      - exact:
+          type: org.acme.kubevirt
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: go
