@@ -1,0 +1,17 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: kubevirt-stop-notify
+spec:
+  broker: inmem-broker
+  filters:
+    - all:
+      - exact:
+          runstrategy: Halted
+      - exact:
+          type: org.acme.kubevirt
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: go
